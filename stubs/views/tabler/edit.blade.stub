@@ -1,5 +1,4 @@
-@extends('{{backLowerNamespace}}.layouts.base')
-
+@extends(back_view_path('layouts.base'))
 
 @section('title','Edition ' . ${{singularSlug}}->{{breadcrumb}})
 

@@ -2,7 +2,7 @@
 
 namespace Guysolamour\Administrable\Crudgenerator\Console\Commands;
 
-use Guysolamour\Administrable\Crudgenerator\Console\Filesystem;
+use Guysolamour\Administrable\Console\Filesystem;
 use Guysolamour\Administrable\Crudgenerator\Exceptions\CrudGeneratorException;
 
 class InstallCrudCommand extends BaseCommand

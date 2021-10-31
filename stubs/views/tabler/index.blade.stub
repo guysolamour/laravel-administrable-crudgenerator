@@ -1,5 +1,4 @@
-@extends('{{backLowerNamespace}}.layouts.base')
-
+@extends(back_view_path('layouts.base'))
 
 @section('title','{{translateModelUcfirst}}')
 
@@ -65,7 +64,7 @@
 </div>
 
 
-@include('{{backLowerNamespace}}.partials._datatable')
-@include('{{backLowerNamespace}}.partials._deleteAll')
+<x-administrable::datatable />
+@deleteAll
 
 @endsection

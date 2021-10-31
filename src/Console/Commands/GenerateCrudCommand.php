@@ -130,9 +130,7 @@ class GenerateCrudCommand extends BaseCommand
         */
         $this->displayTitle('Creating views...');
         [$result, $path] = $crud->generate('views');
-        $this->displayResult($result,
-            $path
-        );
+        $this->displayResult($result,$path);
         $progress->advance();
 
 

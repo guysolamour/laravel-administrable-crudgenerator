@@ -24,6 +24,27 @@ trait CrudTrait
 
 
     /**
+     *
+     * @param string|array $data
+     * @param string $separator
+     * @return array
+     */
+    public function parseCrudParameter($data, string $separator = '|'): array
+    {
+        if (!is_string($data) && !is_array($data)) {
+            $this->triggerError("The data must be a string or an array");
+        }
+
+        if (is_string($data)) {
+            $data = explode($separator, $data);
+        }
+
+        return array_map(fn ($item) => trim($item), array_filter($data));
+    }
+
+
+
+    /**
      * @return array|null
      */
     public function parseConfigurationYamlFile()

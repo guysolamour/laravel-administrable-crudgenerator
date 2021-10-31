@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
-use Guysolamour\Administrable\Crudgenerator\Console\Filesystem;
+use Guysolamour\Administrable\Console\Filesystem;
 use Guysolamour\Administrable\Crudgenerator\Console\Traits\CrudTrait;
 use Guysolamour\Administrable\Crudgenerator\Console\Traits\CommandTrait;
 use Guysolamour\Administrable\Crudgenerator\Exceptions\CrudGeneratorException;
@@ -184,7 +184,7 @@ class Crud
     public function getNamespaceWithSubfolder(): ?string
     {
         /**
-         * @var Crud $this
+         * @var \Guysolamour\Administrable\Crudgenerator\Console\Crud $this
          */
         $namespace = $this->getSubFolder();
 
@@ -199,7 +199,7 @@ class Crud
     public function getParsedName(?string $name = null): array
     {
         /**
-         * @var Crud $this
+         * @var \Guysolamour\Administrable\Crudgenerator\Console\Crud $this
          */
         $name ??= $this->getModel();
 
@@ -210,7 +210,7 @@ class Crud
     public function getModelNamespace(): string
     {
         /**
-         * @var Crud $this
+         * @var \Guysolamour\Administrable\Crudgenerator\Console\Crud $this
          */
         $subfolder = Str::ucfirst($this->getSubFolder());
 
@@ -224,7 +224,7 @@ class Crud
     public function getModelsFolderWithSubfolder(): string
     {
         /**
-         * @var Crud $this
+         * @var \Guysolamour\Administrable\Crudgenerator\Console\Crud $this
          */
         $subfolder = Str::ucfirst($this->getSubFolder());
 

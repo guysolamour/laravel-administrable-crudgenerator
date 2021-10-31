@@ -2,8 +2,10 @@
 
 namespace Guysolamour\Administrable\Crudgenerator;
 
-use Guysolamour\Administrable\Crudgenerator\Console\Commands\GenerateCrudCommand;
+use Guysolamour\Administrable\Crudgenerator\Console\Commands\AppendCrudCommand;
 use Guysolamour\Administrable\Crudgenerator\Console\Commands\InstallCrudCommand;
+use Guysolamour\Administrable\Crudgenerator\Console\Commands\GenerateCrudCommand;
+use Guysolamour\Administrable\Crudgenerator\Console\Commands\RollbackCrudCommand;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -13,22 +15,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     public function boot()
     {
-        // $this->publishes([
-        //     self::CONFIG_PATH => config_path('crudgenerator.php'),
-        // ], 'config');
     }
 
     public function register()
     {
-        // $this->mergeConfigFrom(
-        //     self::CONFIG_PATH,
-        //     'crudgenerator'
-        // );
-
         if ($this->app->runningInConsole()) {
             $this->commands([
-                GenerateCrudCommand::class,
                 InstallCrudCommand::class,
+                GenerateCrudCommand::class,
+                AppendCrudCommand::class,
+                RollbackCrudCommand::class,
             ]);
         }
     }
