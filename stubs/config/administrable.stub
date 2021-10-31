@@ -1,0 +1,29 @@
+globals:
+  # folder: Models
+  # activate or deactivate slug editing in form globally
+  edit_slug: false
+
+  # add clone model in index page
+  clone: true
+
+  # use fillable or guarded
+  fillable: true
+
+  # How many items to generate or use boolean
+  seeder: true # 15 default value
+
+
+
+# Models definitions
+models:
+  Note:
+    imagemanager: { front: front image labe1l, back: back image label, images: images label }
+    fields:
+      - online: { type: boolean, trans: en ligne }
+      - title:
+          name: title
+          slug: true
+          breadcrumb: true
+      - description: { name: description, type: text, rules: required, tinymce: true }
+      - promotion: { type: datetime, rules: req|string, daterange: true  }
+      - delete: { type: datetime, rules: req, datepicker: true }

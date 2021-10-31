@@ -1,0 +1,16 @@
+{!! form_start($form) !!}
+
+{!! form_rest($form) !!}
+
+
+{{-- add tinymce here --}}
+
+
+{{-- form edit button --}}
+
+{{-- form create button --}}
+
+
+{!! form_end($form) !!}
+
+{{-- add daterange here --}}

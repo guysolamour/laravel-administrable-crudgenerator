@@ -1,0 +1,2 @@
+ <a href="{{ route('{{editRoute}}', ${{singularSlug}}) }}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i>&nbsp; Editer</a>
