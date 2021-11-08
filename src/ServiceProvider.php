@@ -9,10 +9,6 @@ use Guysolamour\Administrable\Crudgenerator\Console\Commands\RollbackCrudCommand
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-    const CONFIG_PATH = __DIR__ . '/../config/crudgenerator.php';
-
-    const PACKAGE_PATH = __DIR__;
-
     public function boot()
     {
     }

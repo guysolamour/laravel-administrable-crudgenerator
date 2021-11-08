@@ -25,7 +25,7 @@ class AppendCrudCommand extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Append field to existed crudtab model';
+    protected $description = 'Append field to existed crud model';
 
 
 
