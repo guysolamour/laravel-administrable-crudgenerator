@@ -27,6 +27,6 @@ trait CommandTrait
     {
         $path = Str::start($path, '/');
 
-        return dirname(ServiceProvider::PACKAGE_PATH) . $path;
+        return dirname(ServiceProvider::packagePath()) . $path;
     }
 }
