@@ -4,7 +4,7 @@ namespace Guysolamour\Administrable\Crudgenerator\Console\Commands\Generate;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Guysolamour\Administrable\Console\Crud\Field;
+use Guysolamour\Administrable\Crudgenerator\Console\Field;
 
 
 class GenerateModel extends BaseGenerate

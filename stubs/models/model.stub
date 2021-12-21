@@ -3,12 +3,10 @@
 namespace {{namespace}}\{{modelsNamespace}};
 
 use Guysolamour\Administrable\Models\BaseModel;
-use Guysolamour\Administrable\Traits\ModelTrait;
 
 
 class {{singularClass}} extends BaseModel
 {
-    use ModelTrait;
 
     {{tablename}}
 
