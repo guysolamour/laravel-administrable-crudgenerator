@@ -237,6 +237,8 @@ class Crud
 
     public function getAttributeSeparator(string $attributes): ?string
     {
+        $separator = '|';
+
         if (Str::contains($attributes, ',')) {
             $separator = ',';
         } else if (Str::contains($attributes, '|')) {

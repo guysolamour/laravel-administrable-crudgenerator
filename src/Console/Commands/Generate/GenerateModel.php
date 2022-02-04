@@ -21,7 +21,6 @@ class GenerateModel extends BaseGenerate
         $stub  = $this->crud->filesystem->get($this->crud->getCrudTemplatePath('/models/model.stub'));
         $model = $this->crud->filesystem->compliedFile($stub, false, $this->data_map);
 
-
         $model = $this->addFillableOrGuardedProperty($model);
         $model = $this->addTableNameProperty($model);
         $model = $this->addTimestampProperty($model);
@@ -105,9 +104,7 @@ class GenerateModel extends BaseGenerate
 
         TEXT;
 
-        $model = str_replace($search,    $replace, $model);
-
-        return $model;
+        return str_replace($search,    $replace, $model);
     }
 
     protected function addFillableProperty(string $model): string
@@ -249,7 +246,6 @@ class GenerateModel extends BaseGenerate
         if (!$this->crud->checkIfThereAreDaterangeFields() && !$this->crud->checkIfThereAreDatepickerFields()) {
             return $model;
         }
-
 
         $search = "use Guysolamour\Administrable\Traits\ModelTrait;";
         $model = str_replace($search, $search . PHP_EOL . "use Guysolamour\Administrable\Casts\DaterangepickerCast;", $model);
