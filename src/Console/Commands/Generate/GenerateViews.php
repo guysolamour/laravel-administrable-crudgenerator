@@ -151,7 +151,7 @@ class GenerateViews extends BaseGenerate
 
 
         $complied = $this->loadEditViewImageManagerAssets($complied);
-
+        $complied = $this->loadDropzoneAssets($complied);
 
         $this->crud->filesystem->writeFile($path, $complied,  false);
 
@@ -168,6 +168,7 @@ class GenerateViews extends BaseGenerate
         $complied =  $this->loadBreadcrumbFor('create', $complied);
 
         $complied = $this->loadCreateViewImageManagerAssets($complied);
+        $complied = $this->loadDropzoneAssets($complied);
 
         $this->crud->filesystem->writeFile($path, $complied,  false);
 
@@ -375,6 +376,33 @@ class GenerateViews extends BaseGenerate
         return str_replace($search, $partial, $complied);
     }
 
+    protected function loadDropzoneAssets(string $complied)
+    {
+       $dropzone = $this->crud->getDropzone();
+       $search = "{{-- add dropzone here --}}";
+
+       if (!$dropzone){
+          return str_replace($search, '', $complied);
+       }
+
+       if (is_string($dropzone)){
+            $partial = <<<LABEL
+                @dropzone([
+                                                'model' => \$form->getModel(),
+                                                'label' => '{$dropzone}'
+                                            ])
+            LABEL;
+        }else {
+           $partial = <<<LABEL
+               @dropzone([
+                                                    'model' => \$form->getModel(),
+                                            ])
+           LABEL;
+       }
+
+
+       return str_replace($search, $partial, $complied);
+    }
 
     protected function loadCreateViewImageManagerAssets(string $complied): string
     {

@@ -27,6 +27,8 @@ class GenerateModel extends BaseGenerate
         $model = $this->addCastsProperty($model);
         $model = $this->addDaterangeCast($model);
         $model = $this->addDraftableTrait($model);
+        $model = $this->addUuidTrait($model);
+
         $model = $this->addDaterangeTrait($model);
         $model = $this->addDaterangeTraitProperty($model);
         $model = $this->addDatepickerTraitProperty($model);
@@ -203,7 +205,7 @@ class GenerateModel extends BaseGenerate
     protected function addCastsProperty(string $model): string
     {
         $search = '{{cast}}';
-        // si vide alors on return
+        
         if (!$this->crud->checkIfThereAreCastableFields()) {
             // si pas de cast retirer le pseudo code dans le model
             return  str_replace($search, '', $model);
@@ -255,7 +257,7 @@ class GenerateModel extends BaseGenerate
 
     protected function addMediaTrait(string $model): string
     {
-        if (!$this->crud->hasImagemanager()) {
+        if (!$this->crud->hasImagemanager() && !$this->crud->hasDropzone()) {
             return $model;
         }
 
@@ -286,6 +288,21 @@ class GenerateModel extends BaseGenerate
 
         $search = "use Guysolamour\Administrable\Traits\ModelTrait;";
         $model = str_replace($search, $search . PHP_EOL . "use Guysolamour\Administrable\Traits\DraftableTrait;", $model);
+
+        return $model;
+    }
+
+    protected function addUuidTrait(string $model): string
+    {
+        if (!$this->crud->hasUuidField()) {
+            return $model;
+        }
+
+        $search = "use ModelTrait;";
+        $model = str_replace($search, $search . PHP_EOL . '    use HasUuid;', $model);
+
+        $search = "use Guysolamour\Administrable\Traits\ModelTrait;";
+        $model = str_replace($search, $search . PHP_EOL . "use Guysolamour\Administrable\Traits\HasUuid;", $model);
 
         return $model;
     }

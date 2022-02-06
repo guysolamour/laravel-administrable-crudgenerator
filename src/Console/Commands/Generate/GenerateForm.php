@@ -243,7 +243,7 @@ class GenerateForm extends BaseGenerate
             return <<<TEXT
                 'rules'  => [
                     $rules,
-                    \Illuminate\Validation\Rule::unique('{$this->crud->getTableName()}')->ignore($this->getModel())
+                    \Illuminate\Validation\Rule::unique('{$this->crud->getTableName()}')->ignore(\$this->getModel())
                 ],
 
             TEXT;

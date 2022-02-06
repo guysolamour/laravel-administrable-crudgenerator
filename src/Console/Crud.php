@@ -76,6 +76,9 @@ class Crud
     /** @var string */
     private $slug;
 
+    /** @var bool */
+    private $uuid = false;
+
     /** @var string */
     private $breadcrumb;
 
@@ -93,6 +96,9 @@ class Crud
 
     /** @var array */
     private $imagemanager = [];
+
+    /** @var bool|string */
+    private $dropzone = false;
 
     /**  @var Filesystem  */
     public $filesystem;
@@ -114,6 +120,7 @@ class Crud
         $this->setTableName($data);
         $this->setSubFolder($data);
         $this->setImagemanager($data);
+        $this->setDropzone($data);
 
         $this->setTimestamps($data);
         $this->setClone($data);
@@ -124,6 +131,7 @@ class Crud
         $this->hydrateFields($data);
         $this->setFillableOrGuarded($data);
         $this->setSlug($data);
+        $this->setUuid($data);
         $this->setEditSlug($data);
         $this->setBreadcrumb($data);
 
@@ -330,6 +338,23 @@ class Crud
                 )
             );
         }
+    }
+
+    private function setDropzone(array $data)
+    {
+        $dropzone = Arr::get($data, 'dropzone');
+
+        if (is_null($dropzone)) {
+            return;
+        }
+
+        if (!is_string($dropzone) && !is_bool($dropzone)) {
+            throw new CrudGeneratorException(
+                sprintf("dropzone must be a string or boolean. Current value is [%s].", $dropzone)
+            );
+        }
+
+        $this->dropzone = $dropzone;
     }
 
     private function setImagemanager(array $data): void
@@ -654,9 +679,19 @@ class Crud
         }
     }
 
+    private function setUuid(array $data)
+    {
+        $uuid = Arr::get($data, 'uuid');
+
+        if (!$uuid){
+            return;
+        }
+
+        $this->uuid = $uuid;
+    }
+
     private function setSlug(array $data): void
     {
-        // dd($this->checkIfAfieldIsSluggable());
         $slug = Arr::get($data, 'slug');
 
         if ($slug && !$this->fields->has($slug)) {
@@ -1033,6 +1068,16 @@ class Crud
         return !empty($this->imagemanager);
     }
 
+    public function hasDropzone(): bool
+    {
+        return !empty($this->dropzone);
+    }
+
+    public function hasUuidField() :bool
+    {
+        return !empty($this->uuid);
+    }
+
     public function hasTinymceField(): bool
     {
         foreach ($this->fields as $field) {
@@ -1053,4 +1098,12 @@ class Crud
     {
         return $this->icon;
     }
+
+
+    public function getDropzone()
+    {
+        return $this->dropzone;
+    }
+
+
 }

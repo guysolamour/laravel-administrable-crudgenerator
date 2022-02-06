@@ -48,7 +48,6 @@ class GenerateCrudCommand extends BaseCommand
 
         $crud = new Crud($model, $migrate);
 
-
         /*
         |--------------------------------------------------------------------------
         | Models

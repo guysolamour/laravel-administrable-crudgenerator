@@ -101,6 +101,19 @@ class GenerateMigration extends BaseGenerate
         return $migration_up;
     }
 
+    protected function addUuid(string $migration_up, ?string $file_name = null): string
+    {
+        if ($this->crud->hasUuidField() && !$file_name) {
+            $migration_up .= <<<TEXT
+
+                               \$table->string('uuid')->unique();
+
+                    TEXT;
+        }
+
+        return $migration_up;
+    }
+
     protected function addTimestamps(string $migration_up, ?string $file_name = null): string
     {
         if ($this->crud->getTimestamps() && !$file_name) {
@@ -163,6 +176,7 @@ class GenerateMigration extends BaseGenerate
         [$migration_up, $migration_down] = $this->getUpAndDownMethods($fields_to_create);
 
         $migration_up = $this->addSlug($migration_up, $file_name);
+        $migration_up = $this->addUuid($migration_up, $file_name);
         $migration_up = $this->addTimestamps($migration_up, $file_name);
 
         // Pivot tables must be created before migration due to foreign keys
